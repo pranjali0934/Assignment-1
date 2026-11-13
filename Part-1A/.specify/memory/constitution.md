@@ -1,50 +1,89 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: [TEMPLATE] → 1.0.0 (initial ratification)
+- Modified principles: n/a (first draft, all five principles newly defined)
+- Added sections: Core Principles (5), Engineering Constraints, Quality Gates & Non-Negotiables, Governance
+- Removed sections: none
+- Follow-up TODOs: none
+-->
+
+# Personal Expense Tracker Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Specification-First
+No implementation work proceeds without an approved specification. If an ambiguity is
+discovered during implementation, it MUST be resolved by updating the upstream Spec Kit
+artifact (specification, clarification, plan, or tasks) — never by an ad-hoc code decision
+that isn't reflected back in the spec.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Deterministic Correctness
+This application's behaviour MUST be fully deterministic. Every acceptance criterion MUST be
+expressible as a binary (pass/fail) test. Vague, subjective, or "looks right" criteria are not
+acceptable. Rationale: Part 1A is explicitly scoped as the deterministic counterpart to Part 1B,
+so correctness must be mechanically verifiable, not judged.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Validation at the Boundary
+All business-rule validation — amount format, amount range, date constraints, category
+membership — MUST be enforced at the API layer. The UI MAY also validate for user experience,
+but MUST NOT be the only enforcement point. Rationale: client-side-only validation is trivially
+bypassed and would make the harness's contract tests meaningless.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Harness Independence (NON-NEGOTIABLE)
+Automated harness checks (lint, security/SAST, unit/contract tests) are independent of the
+implementation and MUST NOT be modified, weakened, skipped, or disabled by the coding agent in
+order to force a PASS. A failing check MUST be resolved by fixing the implementation, or by a
+documented, approved specification change — never by editing the check itself to stop it from
+catching the problem.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Human Accountability
+Every automated harness PASS MUST be followed by an explicit human ACCEPT/REJECT decision before
+the result is considered final. The human reviewer remains responsible for the submitted software
+regardless of what the harness reports.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Engineering Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- **Currency**: INR only. No multi-currency support.
+- **Amount type**: Integer only. Decimal/fractional amounts MUST be rejected — never silently
+  rounded or truncated.
+- **Amount range**: Minimum ₹1, maximum ₹1,00,000, inclusive. Values outside this range MUST be
+  rejected with a clear error.
+- **Zero and negative amounts**: Always rejected.
+- **Expense dates**: MUST NOT be future-dated relative to server time at submission. Future-dated
+  expenses are rejected.
+- **Categories**: MUST be selected from a fixed, predefined category list. Free-text categories
+  are not permitted, so that filtering and summaries remain deterministic.
+- **Persistence**: All CRUD operations MUST be atomic and consistent — a failed update must not
+  partially apply.
+- **Budget alerts**: Overspending alerts MUST trigger deterministically from defined budget-limit
+  comparisons, never from fuzzy or approximate thresholds.
+- **Technology stack**: Backend — .NET 10, C#, REST API. Frontend — Angular 21, TypeScript.
+  Testing — xUnit for backend unit/contract tests.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Quality Gates & Non-Negotiables
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+All of the following MUST pass before a harness run is considered a PASS:
+- Static lint/style check (e.g. `dotnet format` / Roslyn analyzers for C#, ESLint for Angular) —
+  zero errors.
+- Static security (SAST) scan — no high/critical findings.
+- xUnit contract tests derived directly from the Engineering Constraints above — 100% pass
+  required, with no skipped or disabled tests.
+
+The coding agent MUST NOT:
+- Weaken, remove, or disable any acceptance criterion, test, lint rule, or security check to
+  achieve a PASS.
+- Introduce silent rounding, truncation, or coercion of invalid amounts.
+- Commit secrets, API keys, or credentials.
+- Report or record a harness result as PASS without it having actually run and passed.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes any conflicting ad-hoc practice for this project. Any amendment
+MUST be made through this file or the corresponding feature specification, with the change and
+its rationale recorded in the Sync Impact Report at the time of amendment. Versioning follows
+semantic versioning: MAJOR for backward-incompatible principle removals/redefinitions, MINOR for
+new principles or materially expanded guidance, PATCH for wording/clarification fixes. Every
+harness run and human review MUST verify compliance with this constitution before a feature is
+accepted.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-11-13 | **Last Amended**: 2026-11-13
