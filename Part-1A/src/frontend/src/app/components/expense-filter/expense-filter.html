@@ -1,0 +1,28 @@
+<div class="expense-filter">
+  <label>
+    Category
+    <select [(ngModel)]="category" name="filterCategory">
+      <option value="">All categories</option>
+      @for (c of categories(); track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    From
+    <input type="date" [(ngModel)]="from" name="filterFrom" />
+  </label>
+
+  <label>
+    To
+    <input type="date" [(ngModel)]="to" name="filterTo" />
+  </label>
+
+  @if (rangeError()) {
+    <p class="error">{{ rangeError() }}</p>
+  }
+
+  <button type="button" (click)="apply()">Apply filter</button>
+  <button type="button" (click)="clear()">Clear</button>
+</div>

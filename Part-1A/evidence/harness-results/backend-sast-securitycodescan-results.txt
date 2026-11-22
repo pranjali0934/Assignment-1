@@ -1,0 +1,9 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ExpenseTracker.Api -> C:\M. Tech\Sem 1\AI SDLC\Assignment-1\Part-1A\src\backend\ExpenseTracker.Api\bin\Debug\net10.0\ExpenseTracker.Api.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.68

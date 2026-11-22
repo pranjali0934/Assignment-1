@@ -1,0 +1,32 @@
+<form (ngSubmit)="submit()">
+  <label>
+    Amount (₹)
+    <input type="number" step="1" [(ngModel)]="amount" name="amount" required />
+  </label>
+
+  <label>
+    Category
+    <select [(ngModel)]="category" name="category" required>
+      <option value="" disabled>Select a category</option>
+      @for (c of categories(); track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Date
+    <input type="date" [(ngModel)]="date" name="date" required />
+  </label>
+
+  <label>
+    Description (optional)
+    <input type="text" [(ngModel)]="description" name="description" />
+  </label>
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <button type="submit">{{ editingExpense ? 'Save changes' : 'Add expense' }}</button>
+</form>

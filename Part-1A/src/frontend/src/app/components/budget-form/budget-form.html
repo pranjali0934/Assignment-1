@@ -1,0 +1,32 @@
+<form (ngSubmit)="submit()" class="budget-form">
+  <label>
+    Category
+    <select [(ngModel)]="category" name="budgetCategory" required>
+      <option value="" disabled>Select a category</option>
+      @for (c of categories(); track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Year
+    <input type="number" [(ngModel)]="year" name="budgetYear" required />
+  </label>
+
+  <label>
+    Month
+    <input type="number" min="1" max="12" [(ngModel)]="month" name="budgetMonth" required />
+  </label>
+
+  <label>
+    Limit amount (₹)
+    <input type="number" step="1" [(ngModel)]="limitAmount" name="budgetLimitAmount" required />
+  </label>
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <button type="submit">Set budget limit</button>
+</form>

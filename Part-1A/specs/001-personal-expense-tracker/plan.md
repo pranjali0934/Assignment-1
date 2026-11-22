@@ -23,8 +23,9 @@ Angular CLI + Angular HttpClient/Reactive Forms
 **Storage**: SQL Server, via EF Core — see `research.md` for rationale vs. SQLite/JSON file
 persistence
 
-**Testing**: xUnit + `WebApplicationFactory` for backend unit/contract/integration tests; Angular
-Karma/Jasmine for frontend unit tests
+**Testing**: xUnit + `WebApplicationFactory` for backend unit/contract/integration tests;
+Angular's built-in Vitest-based unit test builder (`@angular/build:unit-test`, the Angular 21
+default) for frontend unit tests
 
 **Target Platform**: Cross-platform .NET 10 web server (developed on Windows); Angular SPA served
 as static assets

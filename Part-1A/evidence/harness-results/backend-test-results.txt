@@ -1,0 +1,9 @@
+  Determining projects to restore...
+  Restored C:\M. Tech\Sem 1\AI SDLC\Assignment-1\Part-1A\tests\backend\ExpenseTracker.Api.Tests\ExpenseTracker.Api.Tests.csproj (in 2.05 sec).
+  1 of 2 projects are up-to-date for restore.
+  ExpenseTracker.Api -> C:\M. Tech\Sem 1\AI SDLC\Assignment-1\Part-1A\src\backend\ExpenseTracker.Api\bin\Debug\net10.0\ExpenseTracker.Api.dll
+  ExpenseTracker.Api.Tests -> C:\M. Tech\Sem 1\AI SDLC\Assignment-1\Part-1A\tests\backend\ExpenseTracker.Api.Tests\bin\Debug\net10.0\ExpenseTracker.Api.Tests.dll
+Test run for C:\M. Tech\Sem 1\AI SDLC\Assignment-1\Part-1A\tests\backend\ExpenseTracker.Api.Tests\bin\Debug\net10.0\ExpenseTracker.Api.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    37, Skipped:     0, Total:    37, Duration: 1 s - ExpenseTracker.Api.Tests.dll (net10.0)

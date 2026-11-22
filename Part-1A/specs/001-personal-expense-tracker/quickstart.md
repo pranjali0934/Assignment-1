@@ -4,12 +4,13 @@
 
 - .NET 10 SDK installed
 - Node.js + Angular CLI (for Angular 21) installed
-- A SQL Server instance reachable for local development (e.g. SQL Server Express/Developer
-  edition, or a SQL Server container) with a connection string set in
-  `src/backend/appsettings.json`. If using Windows/Integrated Authentication
-  (`Trusted_Connection=True`), the connection string has no credentials and can be committed
-  as-is. If using SQL Server Authentication (username/password), keep the password out of the
-  committed file (e.g. via .NET User Secrets or an environment variable) rather than hardcoding it.
+- A SQL Server instance reachable for local development. This project uses the default local
+  `MSSQLSERVER` instance, addressed by machine name (`Server=PRAN`) with Windows/Integrated
+  Authentication (`Trusted_Connection=True`) — the connection string has no credentials and can
+  be committed as-is (see `src/backend/appsettings.json`). (LocalDB was considered but its CLI
+  tooling (`sqllocaldb`) is not installed on this machine; a full SQL Server instance was
+  already running locally, so that was used instead — see research.md. On another developer's
+  machine, `Server=localhost` or `Server=.` would reach the same local default instance.)
 
 ## Setup
 
