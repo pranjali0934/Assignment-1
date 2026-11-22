@@ -1,0 +1,19 @@
+<form (ngSubmit)="submit()" class="chat-input">
+  <label>
+    Describe an expense
+    <textarea
+      [(ngModel)]="message"
+      name="message"
+      rows="2"
+      placeholder="e.g. I spent 450 rupees on dinner yesterday"
+    ></textarea>
+  </label>
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Thinking…' : 'Submit' }}
+  </button>
+</form>

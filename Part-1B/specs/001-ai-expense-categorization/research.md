@@ -23,18 +23,29 @@ per Constitution Principle III, in case the model's own schema enforcement is im
 dependency on a third-party package with its own versioning/compatibility risk, for a single
 small endpoint.
 
-## Decision: Model selection — Gemini Flash tier
+## Decision: Model selection — Gemini Flash tier, with "thinking" disabled
 
 **Decision**: Use a Gemini "Flash" tier model (fast, low-cost) for extraction, configurable via
-`GeminiOptions.Model` rather than hardcoded, so it can be swapped if needed.
+`GeminiOptions.Model` rather than hardcoded, so it can be swapped if needed. Current default:
+`gemini-3.5-flash`, with `generationConfig.thinkingConfig.thinkingBudget: 0` to disable the
+model's default extended-reasoning ("thinking") mode.
 
 **Rationale**: This is a structured-extraction task (not open-ended generation), well within a
 smaller/faster model's capability, and keeps per-request latency low (spec SC-005: <5s) and
-evaluation-run cost minimal for a ≥15-case dataset.
+evaluation-run cost minimal for a ≥15-case dataset. Live testing (see harness-log.md §3)
+revealed the original plan's `gemini-2.5-flash` had been deprecated for new API keys, and the
+API's own suggested replacement (`gemini-3.8-flash`) was unstable (intermittent 503s/hangs) at
+test time — `gemini-3.5-flash` responded reliably. Every current-generation Gemini model has
+"thinking" enabled by default, which added ~15s of latency for a trivial extraction with no
+benefit to this bounded task, so it is explicitly disabled.
 
 **Alternatives considered**: A larger/more capable Gemini tier — rejected as unnecessary cost
-and latency for a bounded structured-extraction task; can be reconsidered if evaluation
-accuracy (SC-001's 85% threshold) is not met with the Flash tier.
+and latency for a bounded structured-extraction task. Leaving "thinking" enabled — rejected
+after live testing showed ~18s latency for a single-expense extraction, far outside SC-005's
+budget, for no measurable accuracy benefit on this task. Note: even with thinking disabled,
+live-measured latency remained variable (3–14s) due to external service congestion for this
+very new model generation — SC-005 is not reliably met under current conditions (documented as
+a known limitation in harness-log.md, not silently accepted).
 
 ## Decision: No persistence layer
 

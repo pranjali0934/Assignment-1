@@ -1,0 +1,26 @@
+@if (result) {
+  @if (result.clarificationNeeded) {
+    <p class="clarification">{{ result.clarificationQuestion }}</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (expense of result.expenses; track $index) {
+          <tr>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.category }}</td>
+            <td>₹{{ expense.amount }}</td>
+            <td>{{ expense.description }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+}

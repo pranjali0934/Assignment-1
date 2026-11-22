@@ -35,17 +35,17 @@ assess all three stories' non-deterministic behaviour.
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-- [ ] T001 Create solution structure per plan.md: `src/backend/`, `src/frontend/`,
+- [X] T001 Create solution structure per plan.md: `src/backend/`, `src/frontend/`,
       `src/prompts/`, `tests/backend/contract/`, `tests/backend/unit/`, `evals/`,
       `.harness/evaluator/`, `evidence/initial-generation/`, `evidence/final-generation/`
-- [ ] T002 Initialize .NET 10 Web API project `ExpenseAssistant.Api` in `src/backend/`
-- [ ] T003 [P] Initialize xUnit test project `ExpenseAssistant.Api.Tests` referencing
+- [X] T002 Initialize .NET 10 Web API project `ExpenseAssistant.Api` in `src/backend/`
+- [X] T003 [P] Initialize xUnit test project `ExpenseAssistant.Api.Tests` referencing
       `ExpenseAssistant.Api` in `tests/backend/`, with `Microsoft.AspNetCore.Mvc.Testing`
-- [ ] T004 [P] Initialize Angular 21 app `ExpenseAssistant.Web` via Angular CLI in
+- [X] T004 [P] Initialize Angular 21 app `ExpenseAssistant.Web` via Angular CLI in
       `src/frontend/`
-- [ ] T005 [P] Configure backend lint/style: `.editorconfig` in `src/backend/` (reuse Part 1A's
+- [X] T005 [P] Configure backend lint/style: `.editorconfig` in `src/backend/` (reuse Part 1A's
       settings for consistency) plus SecurityCodeScan.VS2019 package reference
-- [ ] T006 [P] Configure frontend lint: ESLint (`angular-eslint` + `eslint-plugin-security` flat
+- [X] T006 [P] Configure frontend lint: ESLint (`angular-eslint` + `eslint-plugin-security` flat
       config) for `src/frontend/`
 
 **Checkpoint**: Projects build and run empty; test projects execute with zero tests.
@@ -56,35 +56,35 @@ assess all three stories' non-deterministic behaviour.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T007 Define `ExtractedExpense`, `ExtractionResponse`, and a `Category` enum (same fixed
+- [X] T007 Define `ExtractedExpense`, `ExtractionResponse`, and a `Category` enum (same fixed
       five values as Part 1A: Food, Transport, Utilities, Entertainment, Other) in
       `src/backend/Models/`, per data-model.md
-- [ ] T008 Define `GeminiOptions` (API key from `GEMINI_API_KEY` env var or User Secrets, model
+- [X] T008 Define `GeminiOptions` (API key from `GEMINI_API_KEY` env var or User Secrets, model
       name, configurable) in `src/backend/Config/GeminiOptions.cs`
-- [ ] T009 Write the system prompt + Gemini `responseSchema` definition (forcing the
+- [X] T009 Write the system prompt + Gemini `responseSchema` definition (forcing the
       `ExtractionResponse` JSON shape via controlled generation) in
       `src/prompts/extraction-prompt.md`
-- [ ] T010 Define `IGeminiClient` interface and implement `GeminiClient` (HttpClient call to
+- [X] T010 Define `IGeminiClient` interface and implement `GeminiClient` (HttpClient call to
       `generateContent` using the prompt/schema from T009) in
       `src/backend/Services/GeminiClient.cs` — per research.md's "direct REST, no SDK" decision
-- [ ] T011 Implement `ValidationService` enforcing: amount integer in [1, 100000] independent of
+- [X] T011 Implement `ValidationService` enforcing: amount integer in [1, 100000] independent of
       model output; category mapped to the fixed enum (unknown → "Other"); no fabricated
       expense when the input provides none — in `src/backend/Services/ValidationService.cs`
-- [ ] T012 Implement deterministic date defaulting in `ValidationService`/`ExtractionService`:
+- [X] T012 Implement deterministic date defaulting in `ValidationService`/`ExtractionService`:
       when the model's response omits a date or returns one that fails to parse, set `Date` to
       the current request date in code — never relying on the Gemini prompt alone to supply
       this default (closes the Constitution Principle III gap for the one field, per
       cross-artifact analysis, that previously had no independent enforcement) — in
       `src/backend/Services/ValidationService.cs` (depends on T011)
-- [ ] T013 [P] Implement error-handling middleware distinguishing a Gemini API/service failure
+- [X] T013 [P] Implement error-handling middleware distinguishing a Gemini API/service failure
       (`502 Bad Gateway`) from an empty/invalid request (`400`) in
       `src/backend/Middleware/ExtractionErrorMiddleware.cs` — per contracts/api.md
-- [ ] T014 [P] Set up a single Angular `environment.ts` with the backend API base URL in
+- [X] T014 [P] Set up a single Angular `environment.ts` with the backend API base URL in
       `src/frontend/src/environments/`
-- [ ] T015 Implement `ExtractionService` orchestrating `GeminiClient` → `ValidationService`,
+- [X] T015 Implement `ExtractionService` orchestrating `GeminiClient` → `ValidationService`,
       with one retry-then-fallback-to-clarification on structurally invalid model output (per
       contracts/api.md) in `src/backend/Services/ExtractionService.cs` (depends on T010, T011)
-- [ ] T016 Implement `ExtractController` (`POST /api/extract`) in
+- [X] T016 Implement `ExtractController` (`POST /api/extract`) in
       `src/backend/Controllers/ExtractController.cs` (depends on T015)
 
 **Checkpoint**: Foundation ready — user story implementation can now begin.
@@ -103,25 +103,25 @@ one expense with correct amount, valid category, and interpreted date.
 
 > Write these tests FIRST; confirm they FAIL before implementation.
 
-- [ ] T017 [P] [US1] Implement a fake `IGeminiClient` test double returning canned JSON
+- [X] T017 [P] [US1] Implement a fake `IGeminiClient` test double returning canned JSON
       responses (valid, decimal-amount, malformed) for use by all contract tests, in
       `tests/backend/FakeGeminiClient.cs`
-- [ ] T018 [P] [US1] Contract test: `POST /api/extract` with a message the fake client resolves
+- [X] T018 [P] [US1] Contract test: `POST /api/extract` with a message the fake client resolves
       to one valid expense returns `200 OK` with `amount`, `category`, `date` matching — in
       `tests/backend/contract/ExtractSingleExpenseTests.cs`
-- [ ] T019 [P] [US1] Contract test: `POST /api/extract` where the fake client's raw response
+- [X] T019 [P] [US1] Contract test: `POST /api/extract` where the fake client's raw response
       contains a decimal amount (e.g. 500.50) results in the harness rejecting that amount — not
       silently rounding it — in `tests/backend/contract/ExtractDecimalAmountTests.cs`
-- [ ] T020 [P] [US1] Contract test: `POST /api/extract` with an empty `message` returns
+- [X] T020 [P] [US1] Contract test: `POST /api/extract` with an empty `message` returns
       `400 Bad Request`, in `tests/backend/contract/ExtractEmptyMessageTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T021 [P] [US1] Implement Angular chat-input component (free-text message box, submit) in
+- [X] T021 [P] [US1] Implement Angular chat-input component (free-text message box, submit) in
       `src/frontend/src/app/components/chat-input/`
-- [ ] T022 [P] [US1] Implement Angular extraction-result component (renders expense(s) or
+- [X] T022 [P] [US1] Implement Angular extraction-result component (renders expense(s) or
       clarification question) in `src/frontend/src/app/components/extraction-result/`
-- [ ] T023 [US1] Implement Angular `ExtractionService` (HTTP client wrapper for
+- [X] T023 [US1] Implement Angular `ExtractionService` (HTTP client wrapper for
       `POST /api/extract`) in `src/frontend/src/app/services/extraction.service.ts` (depends on
       T021, T022)
 
@@ -139,19 +139,19 @@ confirm both are returned as separate, correctly attributed entries.
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T024 [P] [US2] Contract test: `POST /api/extract` where the fake client resolves to two
+- [X] T024 [P] [US2] Contract test: `POST /api/extract` where the fake client resolves to two
       expenses returns both, correctly attributed (amount/category each), in
       `tests/backend/contract/ExtractMultipleExpensesTests.cs`
-- [ ] T025 [P] [US2] Contract test: `POST /api/extract` where one of two described expenses is
+- [X] T025 [P] [US2] Contract test: `POST /api/extract` where one of two described expenses is
       well-formed and the other is missing its amount returns the well-formed expense AND
       `clarificationNeeded: true` for the incomplete one (partial success, per spec Edge
       Cases), in `tests/backend/contract/ExtractPartialMultipleExpensesTests.cs`
 
 ### Implementation for User Story 2
 
-- [ ] T026 [US2] Extend `ValidationService`/`ExtractionService` to validate each expense in a
+- [X] T026 [US2] Extend `ValidationService`/`ExtractionService` to validate each expense in a
       multi-expense response independently (depends on T011, T015)
-- [ ] T027 [US2] Update the Angular extraction-result component to render a list of expenses in
+- [X] T027 [US2] Update the Angular extraction-result component to render a list of expenses in
       `src/frontend/src/app/components/extraction-result/` (depends on T022)
 
 **Checkpoint**: User Stories 1 and 2 both work independently.
@@ -168,24 +168,24 @@ a specific question, and an empty `expenses` array.
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T028 [P] [US3] Contract test: `POST /api/extract` where the fake client resolves to "no
+- [X] T028 [P] [US3] Contract test: `POST /api/extract` where the fake client resolves to "no
       amount determinable" returns `clarificationNeeded: true`, a non-empty
       `clarificationQuestion`, and empty `expenses`, in
       `tests/backend/contract/ExtractClarificationTests.cs`
-- [ ] T029 [P] [US3] Contract test: `POST /api/extract` with gibberish input (fake client
+- [X] T029 [P] [US3] Contract test: `POST /api/extract` with gibberish input (fake client
       resolves to "no expense identifiable") returns `clarificationNeeded: true` with no
       fabricated expense, in `tests/backend/contract/ExtractGibberishTests.cs`
-- [ ] T030 [P] [US3] Contract test: `POST /api/extract` with an adversarial/prompt-injection
+- [X] T030 [P] [US3] Contract test: `POST /api/extract` with an adversarial/prompt-injection
       message whose fake response claims an out-of-range amount (e.g. 999999) is still rejected
       by `ValidationService` regardless of the model's claim, in
       `tests/backend/contract/ExtractAdversarialAmountTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Implement the no-fabrication guard in `ValidationService`: when amount cannot
+- [X] T031 [US3] Implement the no-fabrication guard in `ValidationService`: when amount cannot
       be determined for an expense, that expense is dropped and `ClarificationNeeded` is set,
       never a guessed amount (depends on T011)
-- [ ] T032 [US3] Add clarification-question display state to the chat-input/extraction-result
+- [X] T032 [US3] Add clarification-question display state to the chat-input/extraction-result
       components in `src/frontend/src/app/components/` (depends on T021, T022)
 
 **Checkpoint**: All three user stories are independently functional.
@@ -197,25 +197,25 @@ a specific question, and an empty `expenses` array.
 **Purpose**: The single non-deterministic evaluation pipeline that actually assesses US1–US3
 against real Gemini output — cross-cutting, required before any harness PASS/FAIL is possible.
 
-- [ ] T033 Create `evals/dataset.json` with ≥15 cases, per data-model.md's `EvaluationCase`
+- [X] T033 Create `evals/dataset.json` with ≥15 cases, per data-model.md's `EvaluationCase`
       shape, covering: normal/representative inputs, boundary amounts (₹1, ₹1,00,000),
       ambiguous/underspecified inputs, missing mandatory information, malformed inputs, and
       adversarial/guardrail cases (assignment §4.5) — at least one case per category
-- [ ] T034 [P] Implement the Layer 1 structural validator (JSON schema conformance against
+- [X] T034 [P] Implement the Layer 1 structural validator (JSON schema conformance against
       `ExtractionResponse`) in `.harness/evaluator/StructuralValidator.cs`
-- [ ] T035 [P] Implement the Layer 2 invariant validator (amount range, category-enum mapping,
+- [X] T035 [P] Implement the Layer 2 invariant validator (amount range, category-enum mapping,
       clarification-vs-fabrication correctness — reusing `ValidationService`'s rules) in
       `.harness/evaluator/InvariantValidator.cs`
-- [ ] T036 [P] Implement the Layer 3 semantic/quality evaluator (exact-match scoring against
+- [X] T036 [P] Implement the Layer 3 semantic/quality evaluator (exact-match scoring against
       `expected.expectedExpenses`/`expectClarification`, with an explicit rubric for ambiguous
       cases) in `.harness/evaluator/SemanticEvaluator.cs`
-- [ ] T037 Implement the evaluator entry point: calls the real `ExtractionService` (live Gemini
+- [X] T037 Implement the evaluator entry point: calls the real `ExtractionService` (live Gemini
       API) for each case, runs all three layers, computes `overallPass` per case, and writes
       `evidence/eval-results.json` (depends on T033–T036), in `.harness/evaluator/Program.cs`
-- [ ] T038 Implement aggregate scoring (pass rate ≥ 85% per constitution) and distinguish
+- [X] T038 Implement aggregate scoring (pass rate ≥ 85% per constitution) and distinguish
       Gemini API/service failures from evaluation failures in the evaluator's output (depends
       on T037)
-- [ ] T039 Record per-case response latency in the evaluator (T037) and assert SC-005 (single
+- [X] T039 Record per-case response latency in the evaluator (T037) and assert SC-005 (single
       extraction completes in under 5 seconds) against the live Gemini API; report average and
       max latency alongside the pass rate in `evidence/eval-results.json` (depends on T037,
       T038) — closes the gap identified in cross-artifact analysis, where SC-005 previously had
@@ -228,21 +228,21 @@ against real Gemini output — cross-cutting, required before any harness PASS/F
 
 ## Phase 7: Polish & Cross-Cutting Concerns
 
-- [ ] T040 [P] Unit tests for `ValidationService` boundary cases (₹1 and ₹1,00,000 accepted;
+- [X] T040 [P] Unit tests for `ValidationService` boundary cases (₹1 and ₹1,00,000 accepted;
       ₹0, negative, decimal rejected; unknown category mapped to "Other") in
       `tests/backend/unit/ValidationServiceTests.cs`
-- [ ] T041 [P] Unit tests for the no-fabrication guard (amount-undeterminable → clarification,
+- [X] T041 [P] Unit tests for the no-fabrication guard (amount-undeterminable → clarification,
       never a guessed value) in `tests/backend/unit/NoFabricationGuardTests.cs`
-- [ ] T042 Run `dotnet format` / Roslyn analyzers across `src/backend/` and resolve all findings
-- [ ] T043 Run ESLint across `src/frontend/` and resolve all findings
-- [ ] T044 Run SAST (SecurityCodeScan backend, eslint-plugin-security frontend — consistent
+- [X] T042 Run `dotnet format` / Roslyn analyzers across `src/backend/` and resolve all findings
+- [X] T043 Run ESLint across `src/frontend/` and resolve all findings
+- [X] T044 Run SAST (SecurityCodeScan backend, eslint-plugin-security frontend — consistent
       with Part 1A's tool choices; Semgrep is not used for the same Windows-compatibility
       reason documented in Part 1A) and resolve any high/critical findings
-- [ ] T045 Execute the quickstart.md end-to-end validation scenarios manually against the live
+- [X] T045 Execute the quickstart.md end-to-end validation scenarios manually against the live
       Gemini API and record the outcome
-- [ ] T046 Run the full evaluation harness (T037/T038) against all `evals/dataset.json` cases
+- [X] T046 Run the full evaluation harness (T037/T038) against all `evals/dataset.json` cases
       with the live Gemini API; record `evidence/eval-results.json`
-- [ ] T047 Record initial-generation output, harness run results (including at least one
+- [X] T047 Record initial-generation output, harness run results (including at least one
       genuine failure-and-repair cycle if encountered), and the final human ACCEPT/REJECT
       decision in `evidence/` and `evidence/harness-log.md` (assignment §4.9–4.10)
 

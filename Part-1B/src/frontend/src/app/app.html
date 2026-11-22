@@ -1,0 +1,48 @@
+<main>
+  <h1>AI Expense Categorization Assistant</h1>
+
+  <section>
+    <app-chat-input (extracted)="onExtracted($event)" />
+  </section>
+
+  <section>
+    <h2>Expenses</h2>
+    <p class="session-total">Total: ₹{{ sessionTotal() }}</p>
+
+    @if (allExpenses().length === 0) {
+      <p class="empty">No expenses found.</p>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (expense of allExpenses(); track $index) {
+            <tr>
+              <td>{{ expense.date }}</td>
+              <td>{{ expense.category }}</td>
+              <td>₹{{ expense.amount }}</td>
+              <td>{{ expense.description }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+
+    @if (clarifications().length > 0) {
+      <p class="clarification-note">
+        {{ clarifications().length }} submission(s) needed clarification and were not added above:
+      </p>
+      <ul class="clarification-list">
+        @for (entry of clarifications(); track entry.submittedAt) {
+          <li>"{{ entry.message }}" — {{ entry.response.clarificationQuestion }}</li>
+        }
+      </ul>
+    }
+  </section>
+</main>
