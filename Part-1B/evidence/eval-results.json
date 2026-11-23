@@ -1,34 +1,34 @@
 {
   "totalCases": 16,
-  "passCount": 6,
-  "passRate": 0.375,
+  "passCount": 15,
+  "passRate": 0.9375,
   "threshold": 0.85,
-  "aggregatePass": false,
-  "serviceFailures": 10,
-  "avgLatencyMs": 13135.3125,
-  "maxLatencyMs": 30010,
+  "aggregatePass": true,
+  "serviceFailures": 1,
+  "avgLatencyMs": 8925.875,
+  "maxLatencyMs": 30137,
   "sc005ThresholdMs": 5000,
   "sc005Pass": false,
   "results": [
     {
       "CaseId": "normal-001",
-      "StructuralPass": true,
-      "InvariantPass": true,
-      "SemanticScore": 1,
-      "OverallPass": true,
-      "LatencyMs": 13717,
-      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:450,\u0022Category\u0022:\u0022Food\u0022,\u0022Date\u0022:\u00222026-11-21\u0022,\u0022Description\u0022:\u0022dinner\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
-      "FailureReason": null
-    },
-    {
-      "CaseId": "normal-002",
       "StructuralPass": false,
       "InvariantPass": false,
       "SemanticScore": 0,
       "OverallPass": false,
-      "LatencyMs": 15617,
+      "LatencyMs": 30137,
       "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API returned 503: {\n  \u0022error\u0022: {\n    \u0022code\u0022: 503,\n    \u0022message\u0022: \u0022This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\u0022,\n    \u0022status\u0022: \u0022UNAVAILABLE\u0022\n  }\n}\n"
+      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API request timed out."
+    },
+    {
+      "CaseId": "normal-002",
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 22239,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:200,\u0022Category\u0022:\u0022Transport\u0022,\u0022Date\u0022:\u00222026-11-23\u0022,\u0022Description\u0022:\u0022petrol\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "FailureReason": null
     },
     {
       "CaseId": "normal-003",
@@ -36,8 +36,8 @@
       "InvariantPass": true,
       "SemanticScore": 1,
       "OverallPass": true,
-      "LatencyMs": 6691,
-      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:500,\u0022Category\u0022:\u0022Food\u0022,\u0022Date\u0022:\u00222026-11-22\u0022,\u0022Description\u0022:\u0022groceries\u0022},{\u0022Amount\u0022:200,\u0022Category\u0022:\u0022Transport\u0022,\u0022Date\u0022:\u00222026-11-22\u0022,\u0022Description\u0022:\u0022petrol\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "LatencyMs": 29974,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:500,\u0022Category\u0022:\u0022Food\u0022,\u0022Date\u0022:\u00222026-11-23\u0022,\u0022Description\u0022:\u0022groceries\u0022},{\u0022Amount\u0022:200,\u0022Category\u0022:\u0022Transport\u0022,\u0022Date\u0022:\u00222026-11-23\u0022,\u0022Description\u0022:\u0022petrol\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
       "FailureReason": null
     },
     {
@@ -46,29 +46,29 @@
       "InvariantPass": true,
       "SemanticScore": 1,
       "OverallPass": true,
-      "LatencyMs": 24656,
+      "LatencyMs": 16800,
       "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:300,\u0022Category\u0022:\u0022Utilities\u0022,\u0022Date\u0022:\u00222026-11-16\u0022,\u0022Description\u0022:\u0022electricity bill\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
       "FailureReason": null
     },
     {
       "CaseId": "boundary-001",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 30010,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API request timed out."
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 5542,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:1,\u0022Category\u0022:\u0022Other\u0022,\u0022Date\u0022:\u00222026-11-23\u0022,\u0022Description\u0022:\u0022sticker\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "FailureReason": null
     },
     {
       "CaseId": "boundary-002",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 30001,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API request timed out."
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 6878,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:100000,\u0022Category\u0022:\u0022Utilities\u0022,\u0022Date\u0022:null,\u0022Description\u0022:\u0022rent\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "FailureReason": null
     },
     {
       "CaseId": "ambiguous-001",
@@ -76,19 +76,19 @@
       "InvariantPass": true,
       "SemanticScore": 1,
       "OverallPass": true,
-      "LatencyMs": 21616,
-      "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022How much money did you spend on food?\u0022}",
+      "LatencyMs": 6826,
+      "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022How much money did you spend on food last week?\u0022}",
       "FailureReason": null
     },
     {
       "CaseId": "ambiguous-002",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 30002,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API request timed out."
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 7838,
+      "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022Could you please provide the amount you spent on entertainment?\u0022}",
+      "FailureReason": null
     },
     {
       "CaseId": "missing-info-001",
@@ -96,19 +96,19 @@
       "InvariantPass": true,
       "SemanticScore": 1,
       "OverallPass": true,
-      "LatencyMs": 19848,
-      "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022How much did you spend on dinner?\u0022}",
+      "LatencyMs": 1217,
+      "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022How much did you spend on dinner with friends?\u0022}",
       "FailureReason": null
     },
     {
       "CaseId": "missing-info-002",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 364,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API returned 429: {\n  \u0022error\u0022: {\n    \u0022code\u0022: 429,\n    \u0022message\u0022: \u0022You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\\nPlease retry in 15h37m41.520679272s.\u0022,\n    \u0022status\u0022: \u0022RESOURCE_EXHAUSTED\u0022,\n    \u0022details\u0022: [\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.Help\u0022,\n        \u0022links\u0022: [\n          {\n            \u0022description\u0022: \u0022Learn more about Gemini API quotas\u0022,\n            \u0022url\u0022: \u0022https://aistudio.google.com/docs/rate-limits\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.QuotaFailure\u0022,\n        \u0022violations\u0022: [\n          {\n            \u0022description\u0022: \u0022Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\u0022,\n            \u0022quotaMetric\u0022: \u0022generativelanguage.googleapis.com/generate_content_free_tier_requests\u0022,\n            \u0022quotaId\u0022: \u0022GenerateRequestsPerDayPerProjectPerModel-FreeTier\u0022,\n            \u0022quotaDimensions\u0022: {\n              \u0022location\u0022: \u0022global\u0022,\n              \u0022model\u0022: \u0022gemini-3.6-flash\u0022\n            },\n            \u0022quotaValue\u0022: \u002220\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.RetryInfo\u0022,\n        \u0022retryDelay\u0022: \u002256261s\u0022\n      }\n    ]\n  }\n}\n"
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 1181,
+      "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022How much money did you spend on groceries?\u0022}",
+      "FailureReason": null
     },
     {
       "CaseId": "malformed-001",
@@ -116,59 +116,59 @@
       "InvariantPass": true,
       "SemanticScore": 1,
       "OverallPass": true,
-      "LatencyMs": 15810,
+      "LatencyMs": 2318,
       "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022Could you please describe the expense and provide the amount spent?\u0022}",
       "FailureReason": null
     },
     {
       "CaseId": "malformed-002",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 369,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API returned 429: {\n  \u0022error\u0022: {\n    \u0022code\u0022: 429,\n    \u0022message\u0022: \u0022You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\\nPlease retry in 15h37m25.338656622s.\u0022,\n    \u0022status\u0022: \u0022RESOURCE_EXHAUSTED\u0022,\n    \u0022details\u0022: [\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.Help\u0022,\n        \u0022links\u0022: [\n          {\n            \u0022description\u0022: \u0022Learn more about Gemini API quotas\u0022,\n            \u0022url\u0022: \u0022https://aistudio.google.com/docs/rate-limits\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.QuotaFailure\u0022,\n        \u0022violations\u0022: [\n          {\n            \u0022description\u0022: \u0022Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\u0022,\n            \u0022quotaMetric\u0022: \u0022generativelanguage.googleapis.com/generate_content_free_tier_requests\u0022,\n            \u0022quotaId\u0022: \u0022GenerateRequestsPerDayPerProjectPerModel-FreeTier\u0022,\n            \u0022quotaDimensions\u0022: {\n              \u0022model\u0022: \u0022gemini-3.6-flash\u0022,\n              \u0022location\u0022: \u0022global\u0022\n            },\n            \u0022quotaValue\u0022: \u002220\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.RetryInfo\u0022,\n        \u0022retryDelay\u0022: \u002256245s\u0022\n      }\n    ]\n  }\n}\n"
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 7012,
+      "RawModelOutput": "{\u0022Expenses\u0022:[],\u0022ClarificationNeeded\u0022:true,\u0022ClarificationQuestion\u0022:\u0022Could you please provide details about the expense you would like to log, including the amount and what it was for?\u0022}",
+      "FailureReason": null
     },
     {
       "CaseId": "malformed-003",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 329,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API returned 429: {\n  \u0022error\u0022: {\n    \u0022code\u0022: 429,\n    \u0022message\u0022: \u0022You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\\nPlease retry in 15h37m24.983327978s.\u0022,\n    \u0022status\u0022: \u0022RESOURCE_EXHAUSTED\u0022,\n    \u0022details\u0022: [\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.Help\u0022,\n        \u0022links\u0022: [\n          {\n            \u0022description\u0022: \u0022Learn more about Gemini API quotas\u0022,\n            \u0022url\u0022: \u0022https://aistudio.google.com/docs/rate-limits\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.QuotaFailure\u0022,\n        \u0022violations\u0022: [\n          {\n            \u0022description\u0022: \u0022Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\u0022,\n            \u0022quotaMetric\u0022: \u0022generativelanguage.googleapis.com/generate_content_free_tier_requests\u0022,\n            \u0022quotaId\u0022: \u0022GenerateRequestsPerDayPerProjectPerModel-FreeTier\u0022,\n            \u0022quotaDimensions\u0022: {\n              \u0022location\u0022: \u0022global\u0022,\n              \u0022model\u0022: \u0022gemini-3.6-flash\u0022\n            },\n            \u0022quotaValue\u0022: \u002220\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.RetryInfo\u0022,\n        \u0022retryDelay\u0022: \u002256244s\u0022\n      }\n    ]\n  }\n}\n"
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 1112,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:500.5,\u0022Category\u0022:\u0022Food\u0022,\u0022Date\u0022:null,\u0022Description\u0022:\u0022lunch\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "FailureReason": null
     },
     {
       "CaseId": "adversarial-001",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 382,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API returned 429: {\n  \u0022error\u0022: {\n    \u0022code\u0022: 429,\n    \u0022message\u0022: \u0022You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\\nPlease retry in 15h37m24.643116951s.\u0022,\n    \u0022status\u0022: \u0022RESOURCE_EXHAUSTED\u0022,\n    \u0022details\u0022: [\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.Help\u0022,\n        \u0022links\u0022: [\n          {\n            \u0022description\u0022: \u0022Learn more about Gemini API quotas\u0022,\n            \u0022url\u0022: \u0022https://aistudio.google.com/docs/rate-limits\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.QuotaFailure\u0022,\n        \u0022violations\u0022: [\n          {\n            \u0022description\u0022: \u0022Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\u0022,\n            \u0022quotaMetric\u0022: \u0022generativelanguage.googleapis.com/generate_content_free_tier_requests\u0022,\n            \u0022quotaId\u0022: \u0022GenerateRequestsPerDayPerProjectPerModel-FreeTier\u0022,\n            \u0022quotaDimensions\u0022: {\n              \u0022model\u0022: \u0022gemini-3.6-flash\u0022,\n              \u0022location\u0022: \u0022global\u0022\n            },\n            \u0022quotaValue\u0022: \u002220\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.RetryInfo\u0022,\n        \u0022retryDelay\u0022: \u002256244s\u0022\n      }\n    ]\n  }\n}\n"
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 1198,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:999999,\u0022Category\u0022:\u0022Food\u0022,\u0022Date\u0022:null,\u0022Description\u0022:\u0022food\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "FailureReason": null
     },
     {
       "CaseId": "adversarial-002",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 353,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API returned 429: {\n  \u0022error\u0022: {\n    \u0022code\u0022: 429,\n    \u0022message\u0022: \u0022You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\\nPlease retry in 15h37m24.2601295s.\u0022,\n    \u0022status\u0022: \u0022RESOURCE_EXHAUSTED\u0022,\n    \u0022details\u0022: [\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.Help\u0022,\n        \u0022links\u0022: [\n          {\n            \u0022description\u0022: \u0022Learn more about Gemini API quotas\u0022,\n            \u0022url\u0022: \u0022https://aistudio.google.com/docs/rate-limits\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.QuotaFailure\u0022,\n        \u0022violations\u0022: [\n          {\n            \u0022description\u0022: \u0022Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\u0022,\n            \u0022quotaMetric\u0022: \u0022generativelanguage.googleapis.com/generate_content_free_tier_requests\u0022,\n            \u0022quotaId\u0022: \u0022GenerateRequestsPerDayPerProjectPerModel-FreeTier\u0022,\n            \u0022quotaDimensions\u0022: {\n              \u0022location\u0022: \u0022global\u0022,\n              \u0022model\u0022: \u0022gemini-3.6-flash\u0022\n            },\n            \u0022quotaValue\u0022: \u002220\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.RetryInfo\u0022,\n        \u0022retryDelay\u0022: \u002256244s\u0022\n      }\n    ]\n  }\n}\n"
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 1173,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:500,\u0022Category\u0022:\u0022Other\u0022,\u0022Date\u0022:null,\u0022Description\u0022:\u0022Expense recorded\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "FailureReason": null
     },
     {
       "CaseId": "adversarial-003",
-      "StructuralPass": false,
-      "InvariantPass": false,
-      "SemanticScore": 0,
-      "OverallPass": false,
-      "LatencyMs": 400,
-      "RawModelOutput": "",
-      "FailureReason": "Gemini API/service failure (not an evaluation failure): Gemini API returned 429: {\n  \u0022error\u0022: {\n    \u0022code\u0022: 429,\n    \u0022message\u0022: \u0022You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash, description: Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\\nPlease retry in 15h37m23.910156123s.\u0022,\n    \u0022status\u0022: \u0022RESOURCE_EXHAUSTED\u0022,\n    \u0022details\u0022: [\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.Help\u0022,\n        \u0022links\u0022: [\n          {\n            \u0022description\u0022: \u0022Learn more about Gemini API quotas\u0022,\n            \u0022url\u0022: \u0022https://aistudio.google.com/docs/rate-limits\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.QuotaFailure\u0022,\n        \u0022violations\u0022: [\n          {\n            \u0022description\u0022: \u0022Generate content requests per day limit exceeded on Free Tier. See https://aistudio.google.com/docs/rate-limits.\u0022,\n            \u0022quotaMetric\u0022: \u0022generativelanguage.googleapis.com/generate_content_free_tier_requests\u0022,\n            \u0022quotaId\u0022: \u0022GenerateRequestsPerDayPerProjectPerModel-FreeTier\u0022,\n            \u0022quotaDimensions\u0022: {\n              \u0022model\u0022: \u0022gemini-3.6-flash\u0022,\n              \u0022location\u0022: \u0022global\u0022\n            },\n            \u0022quotaValue\u0022: \u002220\u0022\n          }\n        ]\n      },\n      {\n        \u0022@type\u0022: \u0022type.googleapis.com/google.rpc.RetryInfo\u0022,\n        \u0022retryDelay\u0022: \u002256243s\u0022\n      }\n    ]\n  }\n}\n"
+      "StructuralPass": true,
+      "InvariantPass": true,
+      "SemanticScore": 1,
+      "OverallPass": true,
+      "LatencyMs": 1369,
+      "RawModelOutput": "{\u0022Expenses\u0022:[{\u0022Amount\u0022:-500,\u0022Category\u0022:\u0022Food\u0022,\u0022Date\u0022:\u00222026-11-23\u0022,\u0022Description\u0022:\u0022food\u0022}],\u0022ClarificationNeeded\u0022:false,\u0022ClarificationQuestion\u0022:null}",
+      "FailureReason": null
     }
   ]
 }

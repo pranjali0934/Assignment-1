@@ -36,9 +36,22 @@ var cases = JsonSerializer.Deserialize<List<EvaluationCase>>(casesJson, new Json
 
 Console.WriteLine($"Running {cases.Count} evaluation case(s) against the live Gemini API...");
 
+// Gemini's free tier caps requests at 5/minute (in addition to 20/day) — pacing calls at
+// ~13s apart keeps us under that limit (discovered via a live 429 "per minute" quota error
+// that an unpaced run triggered; see harness-log.md).
+const int perCaseDelayMs = 13_000;
+
 var results = new List<EvaluationResult>();
+var isFirstCase = true;
 foreach (var testCase in cases)
 {
+    if (!isFirstCase)
+    {
+        await Task.Delay(perCaseDelayMs);
+    }
+
+    isFirstCase = false;
+
     var requestDate = DateOnly.FromDateTime(DateTime.UtcNow);
     var stopwatch = Stopwatch.StartNew();
 
